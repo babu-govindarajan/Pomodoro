@@ -9,7 +9,8 @@ public class TaskManager {
 
     public TaskManager()
     {
-
+        tasks = new ArrayList<>();
+        nonCompleteTasks = new ArrayList<>();
     }
 
     public void AddTask(String taskName, String taskDescription) {
@@ -24,7 +25,11 @@ public class TaskManager {
     }
 
     public int TaskCount() {
-        return ListAllNonCompleteTasks().size();
+        if(ListAllNonCompleteTasks() != null)
+            return ListAllNonCompleteTasks().size();
+        else
+            return 0;
+
     }
 
     public int AllTasksCount() {

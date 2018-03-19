@@ -9,13 +9,7 @@ public class Main {
 
         int taskCount = taskManager.TaskCount();
 
-        if(taskCount > 0) {
-            List<Task> tasks = taskManager.ListAllNonCompleteTasks();
-
-            for(Task t : tasks) {
-                System.out.println(t.getTaskId() + " " + t.getTaskName());
-            }
-        } else {
+        if(taskCount <= 0) {
             System.out.println("Add Task(s) to the list");
 
             while(true) {
@@ -30,31 +24,45 @@ public class Main {
 
                 Task task = new Task(taskManager.AllTasksCount(), name, taskDesc);
                 taskManager.AddTask(task);
+
+                System.out.println("Done Adding Task? Yes/No ");
+                Scanner done = new Scanner(System.in);
+                String taskDone = desc.nextLine();
+
+                if(taskDone.startsWith("Y"))
+                    break;
             }
         }
 
-        //If the Task list is Empty create Task
+        if(taskManager.TaskCount() > 0){
 
-            //Each Task should have estimate of number of Pomodoro time takes to finish a Task
-        //Give option to insert new Tasks or work on existing Tasks
+            List<Task> tasks = taskManager.ListAllNonCompleteTasks();
 
-        //Choose a Task from the list
+            for(Task t : tasks) {
+                System.out.println(t.getTaskId() + " " + t.getTaskName());
+            }
 
-        //Start Pomodoro timer
+            System.out.println("Enter Task Id to work on:");
+            Scanner input = new Scanner(System.in);
+            int taskId = input.nextInt();
 
-        //Set the selected Task status in Progress
+            taskManager.setCurrentTask(taskId);
+            taskManager.setCurrentTaskStatus(TaskStatus.Progress);
 
-        //Display the remaining time
+            //Start Pomodoro timer
 
-        //Once the Pomodoro timer is done, alert the user
+            //Display the remaining time
 
-        //Ask user whether the task is done?
+            //Once the Pomodoro timer is done, alert the user
+
+            //Ask user whether the task is done?
             //If so update the task as complete
             //Else keep the Task status in progress
 
-        //Display the break time - 5 minutes
+            //Display the break time - 5 minutes
 
-        //
+        }
+
     }
 
 
